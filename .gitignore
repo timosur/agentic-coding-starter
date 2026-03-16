@@ -1,0 +1,28 @@
+node_modules
+dist
+*.local
+
+# Python
+__pycache__
+*.pyc
+*.egg-info
+.pytest_cache
+.coverage
+.venv
+
+# Environment
+.env
+
+# E2E test results
+test-results
+playwright-report
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

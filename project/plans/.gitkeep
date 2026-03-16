@@ -1,0 +1,4 @@
+# Plans directory
+
+Implementation plans are created here by the Solution Architect agent.
+Each plan follows the naming convention: `{PREFIX}-X-plan.md`
