@@ -1,26 +1,23 @@
-import { config } from '@/config'
+import { config } from "@/config";
 
 interface FetchOptions extends RequestInit {
-  skipAuth?: boolean
+  skipAuth?: boolean;
 }
 
-export async function apiFetch<T>(
-  path: string,
-  options: FetchOptions = {},
-): Promise<T> {
-  const url = `${config.apiBaseUrl}${path}`
+export async function apiFetch<T>(path: string, options: FetchOptions = {}): Promise<T> {
+  const url = `${config.apiBaseUrl}${path}`;
 
   const response = await fetch(url, {
     ...options,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...options.headers,
     },
-  })
+  });
 
   if (!response.ok) {
-    throw new Error(`API error: ${response.status}`)
+    throw new Error(`API error: ${response.status}`);
   }
 
-  return response.json()
+  return response.json();
 }

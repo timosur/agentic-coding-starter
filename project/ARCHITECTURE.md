@@ -27,9 +27,9 @@ _{High-level architecture description}_
 
 ## API Endpoints
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | /api/health | Health check |
+| Method | Path        | Description  |
+| ------ | ----------- | ------------ |
+| GET    | /api/health | Health check |
 <!-- Add endpoints here -->
 
 ## Data Models
@@ -40,7 +40,7 @@ _{Document your models here}_
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| DATABASE_URL | PostgreSQL connection string | Yes |
-| CORS_ORIGINS | Allowed CORS origins | Yes |
+| Variable     | Description                  | Required |
+| ------------ | ---------------------------- | -------- |
+| DATABASE_URL | PostgreSQL connection string | Yes      |
+| CORS_ORIGINS | Allowed CORS origins         | Yes      |

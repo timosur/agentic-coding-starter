@@ -24,13 +24,13 @@ make dev      # Start PostgreSQL + backend + frontend
 
 After cloning, replace these placeholders throughout the codebase:
 
-| Placeholder | Replace With | Example |
-|-------------|--------------|---------|
-| `{PROJECT_NAME}` | Your project name | "My Awesome App" |
-| `{PREFIX}` | Feature ID prefix (3-5 chars) | "APP", "PROJ", "MY" |
-| `starter-backend` | Your backend package name | "my-app-backend" |
-| `starter-frontend` | Your frontend package name | "my-app-frontend" |
-| `starter-db-dev` | Your Docker container name | "my-app-db-dev" |
+| Placeholder        | Replace With                  | Example             |
+| ------------------ | ----------------------------- | ------------------- |
+| `{PROJECT_NAME}`   | Your project name             | "My Awesome App"    |
+| `{PREFIX}`         | Feature ID prefix (3-5 chars) | "APP", "PROJ", "MY" |
+| `starter-backend`  | Your backend package name     | "my-app-backend"    |
+| `starter-frontend` | Your frontend package name    | "my-app-frontend"   |
+| `starter-db-dev`   | Your Docker container name    | "my-app-db-dev"     |
 
 ### Files to update:
 - `backend/pyproject.toml` — package name
@@ -87,16 +87,16 @@ Use `/help` skill anytime to see project status and recommended next steps.
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `make setup` | Install dependencies, create .env |
-| `make dev` | Start PostgreSQL + backend + frontend |
-| `make dev-stop` | Stop PostgreSQL |
-| `make test-backend` | Run pytest |
-| `make test-frontend` | Run Playwright E2E |
-| `make db-migrate` | Run Alembic migrations |
-| `make db-reset` | Reset database |
-| `make clean` | Remove venv, node_modules, dist |
+| Command              | Description                           |
+| -------------------- | ------------------------------------- |
+| `make setup`         | Install dependencies, create .env     |
+| `make dev`           | Start PostgreSQL + backend + frontend |
+| `make dev-stop`      | Stop PostgreSQL                       |
+| `make test-backend`  | Run pytest                            |
+| `make test-frontend` | Run Playwright E2E                    |
+| `make db-migrate`    | Run Alembic migrations                |
+| `make db-reset`      | Reset database                        |
+| `make clean`         | Remove venv, node_modules, dist       |
 
 ## Testing
 

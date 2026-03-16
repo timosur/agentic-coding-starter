@@ -1,5 +1,5 @@
 # Feature Index
 
-| ID | Feature | Status | Spec | Created |
-|----|---------|--------|------|---------|
+| ID  | Feature | Status | Spec | Created |
+| --- | ------- | ------ | ---- | ------- |
 <!-- Add features here -->

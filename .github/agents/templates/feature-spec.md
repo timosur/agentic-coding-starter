@@ -1,10 +1,10 @@
 # {PREFIX}-X: Feature Name
 
-| Field            | Value         |
-| ---------------- | ------------- |
-| **ID**           | {PREFIX}-X    |
-| **Status**       | Planned       |
-| **Created**      | YYYY-MM-DD    |
+| Field            | Value             |
+| ---------------- | ----------------- |
+| **ID**           | {PREFIX}-X        |
+| **Status**       | Planned           |
+| **Created**      | YYYY-MM-DD        |
 | **Dependencies** | None / {PREFIX}-Y |
 
 ## Description

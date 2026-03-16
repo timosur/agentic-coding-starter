@@ -14,8 +14,8 @@ _{What problems does this solve}_
 
 ## Core Features (Roadmap)
 
-| Priority | Feature | Description | Status |
-|----------|---------|-------------|--------|
+| Priority | Feature | Description | Status  |
+| -------- | ------- | ----------- | ------- |
 | P0 (MVP) | ...     | ...         | Planned |
 | P1       | ...     | ...         | Planned |
 | P2       | ...     | ...         | Planned |
