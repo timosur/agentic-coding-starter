@@ -1,14 +1,16 @@
-# Python + React Starter Template
+# Agentic Coding Starter
 
-A starter template for Python (FastAPI) + React projects with AI coding support via GitHub Copilot agents. Includes an integrated [Design OS](https://github.com/timosur/design-os-gh-copilot-template) workflow for product planning and UI design before implementation.
+A full agentic coding starter that takes you from product design to a production-ready full-stack application — all driven by specialized AI agents. Covers the entire lifecycle: product vision, UI design, feature specs, architecture, implementation, and QA.
+
+**Stack:** Python FastAPI + SQLModel backend · Vite React + TypeScript frontend · GitHub Copilot agents
 
 ## Features
 
-- **Backend:** FastAPI + SQLModel + Alembic (Python 3.12+)
+- **Full Agentic Workflow:** 16 specialized Copilot agents guide you from product design through implementation and testing — no manual scaffolding needed
+- **Backend:** Python FastAPI + SQLModel + Alembic migrations (async, PostgreSQL)
 - **Frontend:** React 19 + TypeScript + Tailwind CSS + Vite
-- **Design:** Integrated [Design OS](https://github.com/timosur/design-os-gh-copilot-template) for product planning, UI design, and screen prototyping
-- **AI Coding:** 16 specialized Copilot agents — 11 for design, 5 for implementation
-- **Feature Tracking:** Built-in spec-driven workflow with implementation plans
+- **Design-to-Code Pipeline:** Integrated [Design OS](https://github.com/timosur/design-os-gh-copilot-template) for product planning, UI design, and screen prototyping — exports directly into the implementation workflow
+- **Structured Feature Tracking:** Spec-driven development with implementation plans, acceptance criteria, and phased task checklists
 
 ## Quick Start
 
