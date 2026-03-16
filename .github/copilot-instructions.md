@@ -3,8 +3,9 @@
 ## Build & Run
 
 ```bash
-make setup          # first time: .env, Python + Node deps
+make setup          # first time: .env, Python + Node deps (includes design/)
 make dev            # PostgreSQL → migrations → backend (8000) + frontend (5173)
+make dev-design     # Design OS preview app (5174)
 make dev-stop       # stop containers
 ```
 
@@ -29,15 +30,17 @@ No linter is configured for either frontend or backend.
 
 ## Architecture
 
-Two independent services in one repo, each with its own dependency management:
+Three independent services in one repo, each with its own dependency management:
 
 - **`frontend/`** — React 19 SPA. `npm` + `package.json`. Vite dev server proxied to backend.
 - **`backend/`** — FastAPI REST API. `uv` + `pyproject.toml`. Alembic for DB migrations.
+- **`design/`** — Design OS app. `npm` + `package.json`. Standalone Vite app on port 5174 for product planning, UI design, and screen prototyping. Working files in `design/product/`, screen designs in `design/src/sections/`. Export bridges artifacts into `project/design-export/`.
 
 Service-specific conventions and patterns are in `.github/instructions/`:
 - `backend.instructions.md` — route/service/model patterns, migrations
 - `frontend.instructions.md` — React patterns, Tailwind, API client
 - `security.instructions.md` — secrets, input validation
+- Design OS conventions are in `design/agents.md`
 
 ## Conventions
 
@@ -70,14 +73,61 @@ All features are tracked in `project/features/INDEX.md` with specs in `project/f
 
 See `project/PRD.md` for product vision, target users, and roadmap.
 See `project/ARCHITECTURE.md` for system architecture, API endpoints, data models.
+See `project/design-export/` for UI designs, components, and test specs exported from Design OS.
+
+## Design Phase (Design OS)
+
+The `design/` folder contains a standalone Design OS app for product planning and UI design. Use it **before** implementation to define what gets built.
+
+### Design OS Workflow
+
+1. `@Design: Product Vision` → Define product overview
+2. `@Design: Product Roadmap` → Define sections/features
+3. `@Design: Data Shape` → Sketch entities and relationships
+4. `@Design: Design System` → Define colors, typography, brand
+5. `@Design: Shell` → Design navigation and layout
+6. Per section: `@Design: Shape Section` → `@Design: Sample Data` → `@Design: Screen` → `@Design: Screenshot`
+7. `@Design: Clickdummy` → Assemble navigable prototype for stakeholder demos
+8. `@Design: Export` → Bridge into ai-coding workflow
+
+### What Export Produces
+
+- `project/PRD.md` — Generated from product-overview + roadmap
+- `frontend/src/index.css` — Design tokens as `@theme` block
+- `project/ARCHITECTURE.md` — Data Models updated from data-shape
+- `project/design-export/` — Components, instructions, test specs, data shapes
+
+### After Export
+
+Switch to **Requirements Engineer** to create feature specs from sections, or **Solution Architect** to create implementation plans directly from `project/design-export/instructions/`.
+
+Design OS agents and implementation agents coexist — you can go back to design agents to iterate on UI designs at any time.
 
 ## Development Workflow
 
 Use specialized agents for structured feature development. Agents are selected from the **dropdown in the Copilot Chat window** (not slash commands — those are for skills). Each agent has a distinct persona with appropriate tool restrictions and handoff buttons:
 
 ```
-Requirements Engineer → Solution Architect → Backend Developer ⟷ Frontend Developer → QA Engineer
+Design OS agents → Export → Requirements Engineer → Solution Architect → Backend Developer ⟷ Frontend Developer → QA Engineer
 ```
+
+### Design Agents (Product Planning & UI Design)
+
+| Agent | Purpose |
+|-------|---------|
+| **Design: Product Vision** | Define product overview — name, description, problems, solutions |
+| **Design: Product Roadmap** | Define sections (features) with titles and descriptions |
+| **Design: Data Shape** | Sketch core entities and relationships |
+| **Design: Design System** | Define colors, typography, brand identity |
+| **Design: Shell** | Design the application shell (navigation, layout) |
+| **Design: Shape Section** | Define section specification and scope |
+| **Design: Sample Data** | Generate sample data and TypeScript types for a section |
+| **Design: Screen** | Create screen design components for a section |
+| **Design: Screenshot** | Capture screenshots of screen designs |
+| **Design: Clickdummy** | Assemble navigable prototype from all sections |
+| **Design: Export** | Export designs into `project/design-export/`, generate `project/PRD.md`, write design tokens to `frontend/src/index.css` |
+
+### Implementation Agents
 
 | Agent | Purpose |
 |-------|---------|
@@ -92,6 +142,7 @@ Supporting skills (invoked via `/skill` slash commands):
 | Skill | Purpose |
 |-------|---------|
 | `/help` | Check project status, plan progress, and get next-step guidance |
+| `/frontend-design` | Create distinctive, production-grade frontend interfaces |
 
 Each agent reads `project/features/INDEX.md` at start and suggests the next agent on completion via handoff buttons. Handoffs are user-initiated — an agent never auto-proceeds to the next phase.
 
@@ -122,6 +173,7 @@ Multiple Copilot CLI instances can run simultaneously in separate terminals to w
 
 ### Recommended Session Splits
 
+- **Design session** — Product planning, UI design. Working directory: `design/`.
 - **Frontend session** — UI components, pages, styles. Working directory: `frontend/`.
 - **Backend session** — API routes, services, models, migrations. Working directory: `backend/`.
 - **Cross-cutting session** — Docker, CI/CD, docs, root-level config.

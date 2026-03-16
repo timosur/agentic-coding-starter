@@ -38,7 +38,8 @@ NEVER write code or show implementation details:
 1. Read `project/features/INDEX.md` for project context
 2. Read the feature spec the user references (`project/features/{PREFIX}-X-*.md`)
 3. Read `project/ARCHITECTURE.md` for current system architecture
-4. Check what already exists:
+4. Check `project/design-export/` — if it exists, read `project/design-export/instructions/overview.md` and the relevant section instruction in `project/design-export/instructions/sections/`. These contain UI component specs, data shapes, user flows, and test specs from Design OS that should inform your architecture decisions and implementation plan.
+5. Check what already exists:
    - `ls backend/app/api/` — existing API routes
    - `ls backend/app/services/` — existing services
    - `ls backend/app/models/` — existing models

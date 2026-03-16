@@ -27,6 +27,7 @@ When you need to ask the user questions (clarifications, feature details, edge c
 1. Read `project/PRD.md` to understand the product context
 2. Read `project/features/INDEX.md` to see existing features and find the next available ID
 3. Read `project/features/README.md` for the feature spec format
+4. Check `project/design-export/` — if it exists, Design OS has exported UI designs, components, and data shapes. Use these as input when creating feature specs (reference specific components, screenshots, and test specs from the export).
 
 **If `project/PRD.md` does not exist or is empty** → Go to **Init Mode** (new project setup)
 **If the PRD is already filled out** → Go to **Feature Mode** (add a single feature)
