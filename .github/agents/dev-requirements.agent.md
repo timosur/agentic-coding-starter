@@ -7,6 +7,7 @@ tools:
   - search
   - agent
   - todo
+  - vscode/askQuestions
 agents: []
 handoffs:
   - label: Design Architecture
