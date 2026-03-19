@@ -45,7 +45,7 @@ The product you're planning and designing. When creating screen designs and expo
 
 - Screen design components live in `design/src/sections/[section-name]/` and `design/src/shell/`
 - Product definition files live in `design/product/`
-- Exports are packaged to `project/design-export/` for integration into a separate codebase
+- Exports are packaged to `design/export/` for integration into a separate codebase
 - Follow the design requirements specified in each section's spec
 
 ---
@@ -95,7 +95,7 @@ Assemble a fully navigable clickdummy from all designed sections. Wraps screen d
 ### 8. Export (`@export-product`)
 
 Generate the complete export package with all components, types, and handoff documentation.
-**Output:** `project/design-export/`
+**Output:** `design/export/`
 
 ---
 
@@ -140,7 +140,7 @@ src/
         │   └── index.ts
         └── [ViewName].tsx         # Preview wrapper
 
-project/design-export/                      # Export package (generated)
+design/export/                              # Export package (generated)
 ├── README.md                      # Quick start guide
 ├── product-overview.md            # Product summary
 ├── design-system.md               # Design system documentation (colors, fonts, brand identity)
@@ -234,7 +234,7 @@ Design OS separates concerns between its own UI and the product being designed:
 
 The `@export-product` agent bridges Design OS output into the ai-coding workflow:
 
-- **PRD generation**: Combines `product-overview.md` + `product-roadmap.md` into `project/PRD.md` (ai-coding format)
+- **PRD generation**: Combines `product-overview.md` + `product-roadmap.md` and pushes to Product Hub via `product_hub_update_prd`
 - **Design tokens**: Writes Tailwind `@theme` block into `frontend/src/index.css`
 - **ARCHITECTURE.md**: Updates data models section from `data-shape.md`
 - **Implementation instructions**: Adapted for the Solution Architect, Backend Developer, and Frontend Developer agents
@@ -242,7 +242,7 @@ The `@export-product` agent bridges Design OS output into the ai-coding workflow
 - **Portable components**: Props-based, ready for the `frontend/` React app
 - **Data shapes**: TypeScript interfaces defining what data the components expect
 
-Export output goes to `project/design-export/`. After exporting:
+Export output goes to `design/export/`. After exporting:
 1. Switch to **Solution Architect** to create implementation plans from the design artifacts
 2. Or switch to **Requirements Engineer** to create feature specs from sections
 3. Then **Backend Developer** / **Frontend Developer** to implement

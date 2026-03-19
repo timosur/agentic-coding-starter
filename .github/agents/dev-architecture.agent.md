@@ -36,10 +36,10 @@ NEVER write code or show implementation details:
 
 ## Before Starting
 
-1. Read `project/features/INDEX.md` for project context
-2. Read the feature spec the user references (`project/features/{PREFIX}-X-*.md`)
-3. Read `project/ARCHITECTURE.md` for current system architecture
-4. Check `project/design-export/` — if it exists, read `project/design-export/instructions/overview.md` and the relevant section instruction in `project/design-export/instructions/sections/`. These contain UI component specs, data shapes, user flows, and test specs from Design OS that should inform your architecture decisions and implementation plan.
+1. Use `product_hub_list_features` for project context
+2. Use `product_hub_get_feature` to read the feature spec the user references
+3. Read `docs/ARCHITECTURE.md` for current system architecture
+4. Check `design/export/` — if it exists, read `design/export/instructions/overview.md` and the relevant section instruction in `design/export/instructions/sections/`. These contain UI component specs, data shapes, user flows, and test specs from Design OS that should inform your architecture decisions and implementation plan.
 5. Check what already exists:
    - `ls backend/app/api/` — existing API routes
    - `ls backend/app/services/` — existing services
@@ -99,7 +99,7 @@ List any new packages or external services needed.
 
 ### 4. Create Implementation Plan
 
-After design approval, create `project/plans/{PREFIX}-X-plan.md`:
+After design approval, create the implementation plan via `product_hub_create_plan`:
 
 ```markdown
 # {PREFIX}-X: Feature Name — Implementation Plan

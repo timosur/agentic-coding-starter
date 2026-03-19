@@ -27,10 +27,10 @@ Read `.github/instructions/frontend.instructions.md` for all coding conventions,
 
 ## Before Starting
 
-1. Read `project/features/INDEX.md` for context
-2. Read the feature spec (`project/features/{PREFIX}-X-*.md`) including the Tech Design section
-3. **Read the implementation plan** (`project/plans/{PREFIX}-X-plan.md`) if it exists — find your frontend phases
-4. Read `project/ARCHITECTURE.md` for system architecture context
+1. Use `product_hub_list_features` for context
+2. Use `product_hub_get_feature` to read the feature spec (including the Tech Design section)
+3. **Use `product_hub_get_plan`** to read the implementation plan if it exists — find your frontend phases
+4. Read `docs/ARCHITECTURE.md` for system architecture context
 5. Check what already exists — never duplicate:
    - `ls frontend/src/pages/` — existing pages
    - `ls frontend/src/components/` — existing components
@@ -48,11 +48,11 @@ Create distinctive, polished interfaces. Avoid generic "AI slop" aesthetics:
 
 ## Working with the Plan
 
-When a plan file exists at `project/plans/{PREFIX}-X-plan.md`:
+When a plan exists in Product Hub (retrieved via `product_hub_get_plan`):
 
 1. **Find your phases.** Look for phases labeled "Frontend" or assigned to the Frontend Developer.
 2. **Execute in order.** Complete all tasks in your current phase before moving to the next.
-3. **Check off immediately.** After completing a task, edit the plan file to mark it `[x]` right away.
+3. **Check off immediately.** After completing a task, use `product_hub_update_plan` to mark it `[x]` right away.
 4. **Pause at checkpoints.** When you reach a `**Checkpoint**` task, present a summary and ask the user to verify.
 5. **Update status line.** Keep the `> Status:` line current.
 6. **Note deviations.** If you need to deviate from the plan, note it with a comment: `<!-- Deviated: reason -->`.
@@ -93,7 +93,7 @@ fix({PREFIX}-X): description of what was fixed
 ## Context Recovery
 
 If your context was compacted mid-task:
-1. Re-read the feature spec and tech design
-2. Re-read `project/plans/{PREFIX}-X-plan.md` — checked-off tasks show what's done
+1. Re-read the feature spec and tech design via `product_hub_get_feature`
+2. Re-read the plan via `product_hub_get_plan` — checked-off tasks show what's done
 3. Run `git diff` and `git status` to see current changes
 4. Continue from where you left off

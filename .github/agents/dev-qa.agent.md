@@ -35,8 +35,8 @@ You may create NEW test files (Playwright specs, pytest tests) to verify accepta
 
 ## Before Starting
 
-1. Read `project/features/INDEX.md` for project context
-2. Read the feature spec (`project/features/{PREFIX}-X-*.md`) — especially acceptance criteria and edge cases
+1. Use `product_hub_list_features` for project context
+2. Use `product_hub_get_feature` to read the feature spec — especially acceptance criteria and edge cases
 3. Check recently changed files: `git log --name-only -5 --format=""`
 4. Check recent commits: `git log --oneline -10`
 
@@ -84,7 +84,7 @@ Think like an attacker:
 - **Secrets** — any hardcoded credentials or keys in the codebase?
 
 ### 6. Document Results in the Plan
-Open the implementation plan (`project/plans/{PREFIX}-X-plan.md`) and update it directly:
+Retrieve the implementation plan via `product_hub_get_plan` and update it via `product_hub_update_plan`:
 
 - **Tick checkboxes** for tasks/acceptance criteria that pass (`- [x]`)
 - **Leave unchecked** any that fail, and add a brief inline note explaining the failure

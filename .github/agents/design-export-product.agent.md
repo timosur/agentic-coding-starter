@@ -1,13 +1,13 @@
 ---
 name: "Design: Export"
-description: Export Design OS artifacts into the ai-coding workflow. Generates project/PRD.md, writes design tokens to frontend/src/index.css, and creates project/design-export/ with components, instructions, and test specs for the Solution Architect and developer agents.
+description: Export Design OS artifacts into the ai-coding workflow. Pushes PRD to Product Hub, writes design tokens to frontend/src/index.css, and creates design/export/ with components, instructions, and test specs for the Solution Architect and developer agents.
 handoffs:
   - label: Create Feature Specs
     agent: Requirements Engineer
-    prompt: "Design export is complete. Create feature specs from the design artifacts in project/design-export/."
+    prompt: "Design export is complete. Create feature specs from the design artifacts in design/export/."
   - label: Design Architecture
     agent: Solution Architect
-    prompt: "Design export is complete. Read project/design-export/ and create implementation plans for the designed sections."
+    prompt: "Design export is complete. Read design/export/ and create implementation plans for the designed sections."
 ---
 
 Refer to design/agents.md for the full Design OS context, file structure, and conventions.
@@ -62,12 +62,12 @@ Read all relevant files:
 6. `design/product/shell/spec.md` (if exists)
 7. For each section: `design/product/sections/[section-id]/spec.md`, `data.json`, `types.ts`
 8. List screen design components in `design/src/sections/` and `design/src/shell/`
-9. Read existing `project/PRD.md` and `project/ARCHITECTURE.md` to understand current state
+9. Read existing `docs/ARCHITECTURE.md` to understand current state
 10. Read `frontend/src/index.css` to understand existing Tailwind theme setup
 
-## Step 3: Generate project/PRD.md
+## Step 3: Push PRD to Product Hub
 
-Create or overwrite `project/PRD.md` by combining `product-overview.md` and `product-roadmap.md` into the ai-coding PRD format:
+Use the `product_hub_update_prd` MCP tool to push the PRD by combining `product-overview.md` and `product-roadmap.md` into the PRD format:
 
 ```markdown
 # {Product Name} — PRD
@@ -98,16 +98,16 @@ Create or overwrite `project/PRD.md` by combining `product-overview.md` and `pro
 
 - Frontend: React 19 + TypeScript + Tailwind CSS v4
 - Backend: FastAPI + SQLModel + PostgreSQL
-- Design system defined in Design OS (see `project/design-export/design-system.md`)
+- Design system defined in Design OS (see `design/export/design-system.md`)
 
 ## Non-Goals
 
 {Extract from product-overview.md or note: "Backend architecture decisions, data modeling, and business logic are determined during implementation by the Solution Architect."}
 ```
 
-## Step 4: Update project/ARCHITECTURE.md
+## Step 4: Update docs/ARCHITECTURE.md
 
-Read the existing `project/ARCHITECTURE.md`. If `design/product/data-shape/data-shape.md` exists, update the **Data Models** section with the entities and relationships from the data shape. Preserve all other sections of ARCHITECTURE.md.
+Read the existing `docs/ARCHITECTURE.md`. If `design/product/data-shape/data-shape.md` exists, update the **Data Models** section with the entities and relationships from the data shape. Preserve all other sections of ARCHITECTURE.md.
 
 If no data shape exists, skip this step.
 
@@ -149,12 +149,12 @@ Also add a Google Fonts `@import` before the `@theme` block if custom fonts are 
 @import url('https://fonts.googleapis.com/css2?family={Font+Name}:wght@400;500;600;700&display=swap');
 ```
 
-## Step 6: Create project/design-export/ Directory Structure
+## Step 6: Create design/export/ Directory Structure
 
-Create the `project/design-export/` directory:
+Create the `design/export/` directory:
 
 ```
-project/design-export/
+design/export/
 ├── README.md
 ├── design-system.md
 ├── design-system/
@@ -185,7 +185,7 @@ project/design-export/
 
 ## Step 7: Generate Instructions for ai-coding Agents
 
-### project/design-export/instructions/overview.md
+### design/export/instructions/overview.md
 
 This is for the **Solution Architect** agent to read when creating implementation plans. Include:
 
@@ -200,7 +200,7 @@ This directory contains UI designs, component code, data shapes, and test specs 
 
 ## How to Use with ai-coding Agents
 
-1. **Solution Architect** reads this overview + section instructions to create implementation plans (`project/plans/{PREFIX}-X-plan.md`)
+1. **Solution Architect** reads this overview + section instructions to create implementation plans (stored in Product Hub)
 2. **Backend Developer** implements APIs, database models, and services based on the data shapes and section specs
 3. **Frontend Developer** integrates the exported components, wires up API calls, and implements state management
 
@@ -227,7 +227,7 @@ Design tokens are already applied to `frontend/src/index.css` as a `@theme` bloc
 See `data-shapes/overview.ts` for all TypeScript interfaces. These define the shape of data that UI components expect — use them to inform your database models and API response schemas.
 ```
 
-### project/design-export/instructions/sections/01-shell.md
+### design/export/instructions/sections/01-shell.md
 
 ```markdown
 # Milestone 01: Application Shell
@@ -272,7 +272,7 @@ See `data-shapes/overview.ts` for all TypeScript interfaces. These define the sh
 - [ ] Dark mode toggle works
 ```
 
-### project/design-export/instructions/sections/[NN]-[section-id].md (for each section)
+### design/export/instructions/sections/[NN]-[section-id].md (for each section)
 
 ```markdown
 # Milestone {NN}: {Section Title}
@@ -358,7 +358,7 @@ See `sections/{id}/tests.md` for UI behavior test specs.
 
 ### Shell Components
 
-Copy from `design/src/shell/components/` to `project/design-export/shell/components/`:
+Copy from `design/src/shell/components/` to `design/export/shell/components/`:
 
 - Transform import paths from `@/...` to relative paths
 - Remove any Design OS-specific imports (e.g., `@/lib/product-loader`)
@@ -366,7 +366,7 @@ Copy from `design/src/shell/components/` to `project/design-export/shell/compone
 
 ### Section Components
 
-For each section, copy from `design/src/sections/[section-id]/components/` to `project/design-export/sections/[section-id]/components/`:
+For each section, copy from `design/src/sections/[section-id]/components/` to `design/export/sections/[section-id]/components/`:
 
 - Transform import paths: `@/../design/product/sections/[section-id]/types` → `../types`
 - Remove Design OS-specific imports
@@ -374,19 +374,19 @@ For each section, copy from `design/src/sections/[section-id]/components/` to `p
 
 ### Types Files
 
-Copy `design/product/sections/[section-id]/types.ts` to `project/design-export/sections/[section-id]/types.ts`
+Copy `design/product/sections/[section-id]/types.ts` to `design/export/sections/[section-id]/types.ts`
 
 ### Sample Data
 
-Copy `design/product/sections/[section-id]/data.json` to `project/design-export/sections/[section-id]/sample-data.json`
+Copy `design/product/sections/[section-id]/data.json` to `design/export/sections/[section-id]/sample-data.json`
 
 ## Step 9: Generate Section READMEs
 
-For each section, create `project/design-export/sections/[section-id]/README.md` with: overview, user flows, design decisions, data shapes, visual reference note, components list, and callback props table.
+For each section, create `design/export/sections/[section-id]/README.md` with: overview, user flows, design decisions, data shapes, visual reference note, components list, and callback props table.
 
 ## Step 10: Generate Section Test Instructions
 
-For each section, create `project/design-export/sections/[section-id]/tests.md` with framework-agnostic UI behavior test specs:
+For each section, create `design/export/sections/[section-id]/tests.md` with framework-agnostic UI behavior test specs:
 
 - **User Flow Tests** — For each flow: success path (setup, steps, expected results) and failure paths (validation errors, server errors)
 - **Empty State Tests** — Primary empty state, related records empty state
@@ -399,29 +399,29 @@ Be specific about UI text, labels, and expected messages in all assertions.
 
 ## Step 11: Generate Design System Files
 
-### project/design-export/design-system/tokens.css
+### design/export/design-system/tokens.css
 
 CSS custom properties for colors and typography (same as what was written to `frontend/src/index.css`).
 
-### project/design-export/design-system/tailwind-colors.md
+### design/export/design-system/tailwind-colors.md
 
 Color choices documentation with usage examples for primary, secondary, and neutral.
 
-### project/design-export/design-system/fonts.md
+### design/export/design-system/fonts.md
 
 Google Fonts import snippet and font usage guide.
 
-### project/design-export/design-system.md
+### design/export/design-system.md
 
 Copy from `design/product/design-system/design-system.md` if it exists. This provides brand identity, voice, and UI style context for developers.
 
 ## Step 12: Generate Data Shapes Files
 
-### project/design-export/data-shapes/README.md
+### design/export/data-shapes/README.md
 
 List all entities across sections with descriptions and which sections use them.
 
-### project/design-export/data-shapes/overview.ts
+### design/export/data-shapes/overview.ts
 
 Aggregate all section entity types (data interfaces only, not Props) into one reference file with section-based grouping. Add a comment at top:
 
@@ -439,7 +439,7 @@ Aggregate all section entity types (data interfaces only, not Props) into one re
 
 ## Step 13: Generate README
 
-Create `project/design-export/README.md`:
+Create `design/export/README.md`:
 
 ```markdown
 # Design Export
@@ -461,14 +461,14 @@ This directory contains UI designs exported from Design OS for implementation us
 ### Option A: Solution Architect First (Recommended)
 
 1. Switch to the **Solution Architect** agent
-2. Tell it: "Read `project/design-export/instructions/overview.md` and create implementation plans for the designed sections"
-3. The architect creates phased plans in `project/plans/`
+2. Tell it: "Read `design/export/instructions/overview.md` and create implementation plans for the designed sections"
+3. The architect creates phased plans in Product Hub
 4. Switch to **Backend Developer** and **Frontend Developer** to implement
 
 ### Option B: Requirements Engineer First
 
 1. Switch to the **Requirements Engineer** agent
-2. Create feature specs in `project/features/` based on the section designs
+2. Create feature specs in Product Hub based on the section designs
 3. Then follow the normal ai-coding workflow
 
 ## Design Tokens
@@ -477,7 +477,7 @@ Design tokens from the design system have been written to `frontend/src/index.cs
 
 ## PRD
 
-The product overview and roadmap have been combined into `project/PRD.md`.
+The product overview and roadmap have been pushed to Product Hub via `product_hub_update_prd`.
 
 _Generated by Design OS_
 ```
@@ -486,23 +486,23 @@ _Generated by Design OS_
 
 Copy any `.png` files from:
 
-- `design/product/shell/` → `project/design-export/shell/`
-- `design/product/sections/[section-id]/` → `project/design-export/sections/[section-id]/`
+- `design/product/shell/` → `design/export/shell/`
+- `design/product/sections/[section-id]/` → `design/export/sections/[section-id]/`
 
 ## Step 15: Confirm Completion
 
 Let the user know what was generated, listing:
 
-- `project/PRD.md` — generated/updated
+- **Product Hub** — PRD pushed via `product_hub_update_prd`
 - `frontend/src/index.css` — design tokens injected (if design system exists)
-- `project/ARCHITECTURE.md` — data models updated (if data shape exists)
-- `project/design-export/` — full listing of what's inside
+- `docs/ARCHITECTURE.md` — data models updated (if data shape exists)
+- `design/export/` — full listing of what's inside
 
 Then explain next steps:
 
 "Export complete! Here's what to do next:
 
-1. **Review `project/PRD.md`** — verify the product vision and roadmap look correct
+1. **Review the PRD in Product Hub** — use `product_hub_get_prd` to verify the product vision and roadmap look correct
 2. **Check `frontend/src/index.css`** — design tokens are in the `@theme` block
 3. **Next agent:** Switch to the **Solution Architect** to create implementation plans from the design artifacts, or **Requirements Engineer** to create feature specs first."
 
@@ -510,8 +510,8 @@ Then explain next steps:
 
 - Always transform import paths when copying components
 - Design tokens go directly to `frontend/src/index.css` — not just into design-export/
-- `project/PRD.md` follows the ai-coding template format (Vision, Target Users, Core Features table, etc.)
+- The PRD follows the ai-coding template format (Vision, Target Users, Core Features table, etc.) and is stored in Product Hub
 - Instructions reference the ai-coding agents (Solution Architect, Backend Developer, Frontend Developer) — not generic coding agents
-- The export does NOT touch `project/features/` or `project/plans/` — those are created by the Requirements Engineer and Solution Architect respectively
+- The export does NOT create feature specs or plans — those are created by the Requirements Engineer and Solution Architect respectively via Product Hub
 - No zip generation — the export lives in the repository tree
 - Components are portable — they work with any React setup using Tailwind CSS v4

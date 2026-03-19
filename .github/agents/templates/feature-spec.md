@@ -31,4 +31,4 @@ _To be filled by the Solution Architect agent._
 
 ## Implementation Plan
 
-_See `project/plans/{PREFIX}-X-plan.md` (created by the Solution Architect agent)._
+_See the implementation plan in Product Hub (created by the Solution Architect agent)._

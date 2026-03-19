@@ -25,12 +25,12 @@ When you need to ask the user questions (clarifications, feature details, edge c
 
 ## Before Starting
 
-1. Read `project/PRD.md` to understand the product context
-2. Read `project/features/INDEX.md` to see existing features and find the next available ID
-3. Read `project/features/README.md` for the feature spec format
-4. Check `project/design-export/` — if it exists, Design OS has exported UI designs, components, and data shapes. Use these as input when creating feature specs (reference specific components, screenshots, and test specs from the export).
+1. Use `product_hub_get_prd` to understand the product context
+2. Use `product_hub_list_features` to see existing features and find the next available ID
+3. Read the `/product-hub` skill for feature spec format and conventions
+4. Check `design/export/` — if it exists, Design OS has exported UI designs, components, and data shapes. Use these as input when creating feature specs (reference specific components, screenshots, and test specs from the export).
 
-**If `project/PRD.md` does not exist or is empty** → Go to **Init Mode** (new project setup)
+**If `product_hub_get_prd` returns empty or no content** → Go to **Init Mode** (new project setup)
 **If the PRD is already filled out** → Go to **Feature Mode** (add a single feature)
 
 ---
@@ -48,7 +48,7 @@ Ask the user interactive questions:
 - What are the constraints? (timeline, budget, team size)
 
 ### Phase 2: Create the PRD
-Fill out `project/PRD.md` with:
+Push the PRD to Product Hub via `product_hub_update_prd` with:
 - **Vision:** Clear 2-3 sentence description
 - **Target Users:** Who they are, needs, pain points
 - **Core Features (Roadmap):** Prioritized table (P0 = MVP, P1 = next, P2 = later)
@@ -66,12 +66,12 @@ Present the breakdown for user review.
 
 ### Phase 4: Create Feature Specs
 For each feature (after user approval):
-- Create a spec file using the template at `.github/agents/templates/feature-spec.md`
-- Save to `project/features/{PREFIX}-X-feature-name.md`
+- Create a spec using the template at `.github/agents/templates/feature-spec.md`
+- Save to Product Hub via `product_hub_create_feature` with the spec content as markdown
 - Include user stories, acceptance criteria, and edge cases
 
 ### Phase 5: Update Tracking
-- Update `project/features/INDEX.md` with all new features
+- Verify all features are created in Product Hub via `product_hub_list_features`
 - Verify the PRD roadmap matches the feature specs
 
 ### Init Mode Handoff
@@ -84,7 +84,7 @@ For each feature (after user approval):
 Use this mode when the PRD exists and the user wants to add a new feature.
 
 ### Phase 1: Understand the Feature
-1. Check existing features in `project/features/INDEX.md` — ensure no duplicates
+1. Check existing features via `product_hub_list_features` — ensure no duplicates
 2. Check existing code structure:
    - `ls backend/app/api/` — existing API routes
    - `ls frontend/src/pages/` — existing pages
@@ -103,8 +103,8 @@ Ask about edge cases:
 
 ### Phase 3: Write Feature Spec
 - Use the template from `.github/agents/templates/feature-spec.md`
-- Assign the next available `{PREFIX}-X` ID from `project/features/INDEX.md`
-- Save to `project/features/{PREFIX}-X-feature-name.md`
+- Assign the next available `{PREFIX}-X` ID from `product_hub_list_features`
+- Save to Product Hub via `product_hub_create_feature`
 
 ### Phase 4: User Review
 Present the spec and ask for approval:
@@ -112,8 +112,8 @@ Present the spec and ask for approval:
 - "Changes needed" → Iterate
 
 ### Phase 5: Update Tracking
-- Add the new feature to `project/features/INDEX.md` with status **Planned**
-- Add the feature to the PRD roadmap table in `project/PRD.md`
+- The feature is already stored in Product Hub with status **Planned**
+- Update the PRD roadmap table via `product_hub_update_prd`
 
 ### Feature Mode Handoff
 > "Feature spec is ready! Switch to the **Solution Architect** agent to design the technical approach."
