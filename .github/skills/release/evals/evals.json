@@ -1,0 +1,35 @@
+{
+  "skill_name": "release",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Ship it",
+      "expected_output": "Full flow: derive project name from git remote, detect services with commits since last tag, propose bump types, update changelog, tag them, then detect newer tags vs deployed versions in homelab, show comparison table, update deployment YAMLs, commit and push homelab.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "What's deployed right now?",
+      "expected_output": "Derive project name from git remote. Read current image tags from homelab deployment files and latest git tags. Present a status table showing deployed vs available versions for each service and environment. No changes made.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Bump frontend patch and deploy to preview",
+      "expected_output": "Update changelog, tag frontend with next patch version plus -preview.N suffix, push tag, then update only the preview frontend-deployment.yaml in homelab, commit and push.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Tag backend minor",
+      "expected_output": "Update changelog, compute next minor version for backend, create annotated git tag, push to origin. Do not update homelab.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Deploy to production",
+      "expected_output": "Phase 3 only: derive project name, compare latest stable tags to production deployment YAMLs in homelab/apps/<project>/. Update any that differ, commit and push. Skip preview environment.",
+      "files": []
+    }
+  ]
+}
