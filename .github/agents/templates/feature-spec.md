@@ -1,11 +1,5 @@
 # {PREFIX}-X: Feature Name
 
-| Field            | Value             |
-| ---------------- | ----------------- |
-| **ID**           | {PREFIX}-X        |
-| **Created**      | YYYY-MM-DD        |
-| **Dependencies** | None / {PREFIX}-Y |
-
 ## Description
 
 _What this feature does and why it matters._
