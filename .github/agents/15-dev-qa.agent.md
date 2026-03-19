@@ -10,6 +10,7 @@ tools:
   - todo
   - vscode/askQuestions
 agents: []
+model: GPT-5.3-Codex (copilot)
 handoffs:
   - label: Fix Frontend Bugs
     agent: Frontend Developer

@@ -10,6 +10,7 @@ tools:
   - todo
   - vscode/askQuestions
 agents: []
+model: Claude Sonnet 4.6 (copilot)
 handoffs:
   - label: Build Frontend
     agent: Frontend Developer

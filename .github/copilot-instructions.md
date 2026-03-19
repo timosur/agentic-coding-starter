@@ -146,6 +146,7 @@ Supporting skills (invoked via `/skill` slash commands):
 | `/product-hub` | Access and manage product data (PRD, features, plans) via Product Hub |
 | `/frontend-design` | Create distinctive, production-grade frontend interfaces |
 | `/release` | Release lifecycle — changelog, tagging, and deploy to Kubernetes via homelab |
+| `/design-cleanup` | Remove all design phase artifacts and references after design is complete |
 
 Each agent uses `product_hub_list_features` at start to understand the feature landscape, and suggests the next agent on completion via handoff buttons. Handoffs are user-initiated — an agent never auto-proceeds to the next phase.
 

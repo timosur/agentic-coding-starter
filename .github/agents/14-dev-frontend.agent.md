@@ -10,6 +10,7 @@ tools:
   - todo
   - vscode/askQuestions
 agents: []
+model: Claude Opus 4.6 (copilot)
 handoffs:
   - label: Build Backend First
     agent: Backend Developer
