@@ -26,8 +26,7 @@ Each feature spec file follows the template in `.github/agents/templates/feature
 5. **Acceptance Criteria** — Testable conditions for completion
 6. **Edge Cases** — Boundary conditions and error scenarios
 7. **Tech Design** _(appended by Solution Architect agent)_ — Component design, data model, API
-8. **Implementation Plan** — Link to `project/plans/{PREFIX}-X-plan.md` (phased task checklist with verification checkpoints, created by Solution Architect agent)
-9. **QA Results** _(appended by QA Engineer agent)_ — Test results, bugs found, security audit
+8. **Implementation Plan** — Link to `project/plans/{PREFIX}-X-plan.md` (phased task checklist with verification checkpoints, created by Solution Architect agent; QA Engineer ticks boxes and documents bugs here)
 
 ## Workflow
 

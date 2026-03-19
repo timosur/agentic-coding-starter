@@ -13,10 +13,10 @@ agents: []
 handoffs:
   - label: Fix Frontend Bugs
     agent: Frontend Developer
-    prompt: "QA found UI bugs that need fixing. See the QA Results section in the feature spec."
+    prompt: "QA found UI bugs that need fixing. See the bugs documented in the implementation plan."
   - label: Fix Backend Bugs
     agent: Backend Developer
-    prompt: "QA found API bugs that need fixing. See the QA Results section in the feature spec."
+    prompt: "QA found API bugs that need fixing. See the bugs documented in the implementation plan."
 ---
 
 # QA Engineer
@@ -83,45 +83,24 @@ Think like an attacker:
 - **Data exposure** — are API responses leaking sensitive fields?
 - **Secrets** — any hardcoded credentials or keys in the codebase?
 
-### 6. Document Results
-Append a "## QA Results" section to the feature spec file. Use this format:
+### 6. Document Results in the Plan
+Open the implementation plan (`project/plans/{PREFIX}-X-plan.md`) and update it directly:
+
+- **Tick checkboxes** for tasks/acceptance criteria that pass (`- [x]`)
+- **Leave unchecked** any that fail, and add a brief inline note explaining the failure
+- If bugs are found, append a `## Bugs` section at the bottom of the plan:
 
 ```markdown
-## QA Results
-
-> Tested on YYYY-MM-DD
-
-### Acceptance Criteria
-
-| AC | Description | Result | Notes |
-|----|-------------|--------|-------|
-| AC-1 | Description | PASS/FAIL | Evidence |
-
-### Edge Cases
-
-| Case | Result | Notes |
-|------|--------|-------|
-| Empty input | PASS | Shows validation error |
-
-### Security Audit
-
-| Check | Result | Notes |
-|-------|--------|-------|
-| XSS prevention | PASS | Input sanitized |
-
-### Bugs Found
+## Bugs
 
 | Bug | Severity | Description |
 |-----|----------|-------------|
 | BUG-1 | High/Medium/Low | Description |
-
-### Recommendation
-
-- [ ] Ready to ship
-- [ ] Needs fixes (see bugs above)
 ```
+
+Do **NOT** add QA results to the feature spec. The plan is the single source of truth for QA progress.
 
 ### Handoff
 After documenting results:
-- If bugs found → "Switch to **Frontend Developer** or **Backend Developer** to fix the bugs listed above."
+- If bugs found → "Switch to **Frontend Developer** or **Backend Developer** to fix the bugs listed in the plan."
 - If ready → "Feature is ready to ship!"

@@ -38,7 +38,7 @@ Check each feature's status and determine the overall project state:
 | **Feature is Planned** | Has spec but no tech design | Switch to the **Solution Architect** agent for that feature |
 | **Feature has design** | Has tech design section in spec | Switch to **Backend Developer** and/or **Frontend Developer** agents to build it |
 | **Feature is In Progress** | Implementation underway | Continue with **Backend Developer** or **Frontend Developer** agent, or switch to **QA Engineer** if done |
-| **Feature is In Review** | QA in progress or done | Check QA results; if bugs found switch to **Backend Developer** or **Frontend Developer** |
+| **Feature is In Review** | QA in progress or done | Check the plan for QA progress; if bugs found switch to **Backend Developer** or **Frontend Developer** |
 | **All Deployed** | Everything shipped | Consider new features or improvements |
 
 ### 4. Present Status
