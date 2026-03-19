@@ -1,16 +1,19 @@
 # Agentic Coding Starter
 
-A full agentic coding starter that takes you from product design to a production-ready full-stack application — all driven by specialized AI agents. Covers the entire lifecycle: product vision, UI design, feature specs, architecture, implementation, and QA.
+My personal starter template for new private projects. Clone it, rename placeholders, and start building — the full agent-driven workflow, CI pipelines, and Kubernetes deploy chain come ready out of the box.
 
-**Stack:** Python FastAPI + SQLModel backend · Vite React + TypeScript frontend · GitHub Copilot agents
+Takes you from product design to a production-ready full-stack app, all driven by specialized AI agents. Covers the entire lifecycle: product vision, UI design, feature specs, architecture, implementation, QA, and release.
 
-## Features
+**Stack:** Python FastAPI + SQLModel backend · React 19 + TypeScript + Tailwind frontend · GitHub Copilot agents · GitHub Actions CI → ghcr.io → ArgoCD (homelab)
 
-- **Full Agentic Workflow:** 16 specialized Copilot agents guide you from product design through implementation and testing — no manual scaffolding needed
-- **Backend:** Python FastAPI + SQLModel + Alembic migrations (async, PostgreSQL)
-- **Frontend:** React 19 + TypeScript + Tailwind CSS + Vite
-- **Design-to-Code Pipeline:** Integrated [Design OS](https://github.com/timosur/design-os-gh-copilot-template) for product planning, UI design, and screen prototyping — exports directly into the implementation workflow
-- **Structured Feature Tracking:** Spec-driven development with implementation plans, acceptance criteria, and phased task checklists — managed via Product Hub
+## How It Works
+
+1. **Clone this repo** for a new project and replace placeholders (see [Customization](#customization)).
+2. **Design** — optionally use Design OS agents to plan the product and prototype UI screens.
+3. **Implement** — use specialized agents (Requirements Engineer → Solution Architect → Backend/Frontend Developer → QA Engineer) to spec, architect, and build features.
+4. **Release** — tag services, CI builds container images, then update Kubernetes manifests in `~/code/homelab` so ArgoCD deploys automatically.
+
+Each project gets two independently versioned services (`frontend`, `backend`), each with its own GitHub Actions workflow, container image, and Kubernetes deployment.
 
 ## Quick Start
 
@@ -49,42 +52,28 @@ After cloning, replace these placeholders throughout the codebase:
 
 ```
 ├── .github/
-│   ├── copilot-instructions.md   # Main Copilot config
-│   ├── agents/                   # 16 specialized agents
-│   │   ├── product-vision.agent.md   # Design: Product Vision
-│   │   ├── product-roadmap.agent.md  # Design: Product Roadmap
-│   │   ├── data-shape.agent.md       # Design: Data Shape
-│   │   ├── design-system.agent.md    # Design: Design System
-│   │   ├── design-shell.agent.md     # Design: Shell
-│   │   ├── shape-section.agent.md    # Design: Shape Section
-│   │   ├── sample-data.agent.md      # Design: Sample Data
-│   │   ├── design-screen.agent.md    # Design: Screen
-│   │   ├── screenshot-design.agent.md # Design: Screenshot
-│   │   ├── clickdummy.agent.md       # Design: Clickdummy
-│   │   ├── export-product.agent.md   # Design: Export
-│   │   ├── requirements.agent.md     # Requirements Engineer
-│   │   ├── architecture.agent.md     # Solution Architect
-│   │   ├── backend.agent.md          # Backend Developer
-│   │   ├── frontend.agent.md         # Frontend Developer
-│   │   └── qa.agent.md               # QA Engineer
-│   ├── instructions/             # Auto-applied rules
-│   └── skills/                   # /help + /frontend-design + /product-hub
+│   ├── copilot-instructions.md       # Main Copilot config
+│   ├── agents/                       # 16 specialized agents
+│   ├── instructions/                 # Auto-applied coding rules
+│   ├── skills/                       # /help, /frontend-design, /product-hub, /release
+│   └── workflows/                    # CI: build & push container images on tag
+│       ├── frontend.yml              #   triggers on frontend/v* tags
+│       └── backend.yml               #   triggers on backend/v* tags
 ├── docs/
-│   └── ARCHITECTURE.md           # System architecture
-├── design/                       # Design OS app (standalone Vite on :5174)
-│   ├── product/                  # Product planning files
-│   ├── export/                   # Design export artifacts (generated)
-│   ├── src/                      # Screen designs & preview app
-│   └── package.json              # Design OS dependencies
-├── backend/                      # FastAPI backend
-│   ├── app/                      # Application code
-│   ├── tests/                    # Pytest tests
-│   └── alembic/                  # DB migrations
-├── frontend/                     # React frontend
-│   ├── src/                      # Application code
-│   └── e2e/                      # Playwright tests
-├── Makefile                      # Dev commands
-└── docker-compose.yml            # PostgreSQL
+│   └── ARCHITECTURE.md               # System architecture
+├── design/                           # Design OS app (standalone Vite on :5174)
+│   ├── product/                      # Product planning files
+│   ├── export/                       # Design export artifacts (generated)
+│   └── src/                          # Screen designs & preview app
+├── backend/                          # FastAPI backend
+│   ├── app/                          # Application code
+│   ├── tests/                        # Pytest tests
+│   └── alembic/                      # DB migrations
+├── frontend/                         # React frontend
+│   ├── src/                          # Application code
+│   └── e2e/                          # Playwright tests
+├── Makefile                          # Dev commands
+└── docker-compose.yml                # PostgreSQL (dev)
 ```
 
 ## Development Workflow
@@ -114,6 +103,28 @@ Requirements Engineer → Solution Architect → Backend/Frontend Developer → 
 5. **Ready to test?** Switch to **QA Engineer**
 
 Use `/help` skill anytime to see project status and recommended next steps.
+
+## Release & Deployment
+
+Services are independently versioned via git tags (`<service>/v<semver>`). The `/release` skill handles the full lifecycle:
+
+1. **Changelog** — collects commits since the last tag, appends to `CHANGELOG.md`
+2. **Tagging** — creates git tags that trigger GitHub Actions CI → builds multi-arch images → pushes to `ghcr.io`
+3. **Deploy** — updates Kubernetes manifests in `~/code/homelab` → ArgoCD syncs automatically
+
+```bash
+# Example: the /release skill handles all of this via Copilot chat
+# "ship it"           → full flow for all changed services
+# "bump frontend"     → changelog + tag for frontend only
+# "deploy to preview" → update preview manifests in homelab
+# "what's deployed?"  → show status table
+```
+
+Each project gets two environments in homelab:
+- **Production** — `apps/<project-name>/` (stable tags like `v1.2.3`)
+- **Preview** — `apps/<project-name>-preview/` (preview tags like `v1.2.3-preview.1`)
+
+Preview → stable promotion retags the existing image instead of rebuilding.
 
 ## Commands
 
